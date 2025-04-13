@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { QUERY_KEYS } from "@/api/QueryKeys";
 import { getApiData } from "@/api/http";
 import ShopCards from "./ShopCards";
+import './style.css'
 
 const ShopContainer = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -65,15 +66,11 @@ const ShopContainer = () => {
   const totalPage = Math.ceil(data?.meta?.pagination?.total / pageSize);
 
   return (
-    <div className="container mx-auto">
-      <div className="grid grid-cols-12">
+    <div className="container mx-auto max-w-screen-xl">
+      <div className="grid grid-cols-12 my-10">
         <div className="col-span-3">
-          <h2>FIlter Price</h2>
-          <div className="flex items-center justify-between">
-            <span>Min: {startValue}</span>
-            <span>Max: {endValue}</span>
-          </div>
-          <h1>Categories</h1>
+          
+          <h1 className="conttitle">Colors</h1>
           {categories?.data?.map((category: any, index: number) => (
             <div key={index} className="flex items-center gap-2">
               <input
@@ -95,8 +92,6 @@ const ShopContainer = () => {
               <label htmlFor={category.id}>{category.name}</label>
             </div>
           ))}
-        </div>
-        <div className="col-span-9">
           <div className="my-4 ">
             <input
               type="text"
@@ -116,7 +111,10 @@ const ShopContainer = () => {
               Search
             </button>
           </div>
-          <div ref={ref} className="grid grid-cols-4 gap-4">
+        </div>
+        <div className="col-span-9">
+          
+          <div ref={ref} className="grid grid-cols-4">
             {data &&
               data?.data?.map((shop: any, index: number) => (
                 <ShopCards
@@ -132,7 +130,7 @@ const ShopContainer = () => {
               ))}
           </div>
           <div className="flex items-center justify-center gap-2.5 my-4">
-            <button
+            {/* <button
               onClick={() => {
                 if (pageLimit > 1) {
                   setPageLimit(pageLimit - 1);
@@ -147,11 +145,11 @@ const ShopContainer = () => {
               className="bg-blue-500 text-white px-4 py-2 rounded"
             >
               Previous
-            </button>
-            <div>
-              Page {pageLimit} of {totalPage}
+            </button> */}
+            <div className="p-2 border border-amber-200">
+               {pageLimit}
             </div>
-            <button
+            {/* <button
               onClick={() => {
                 if (pageLimit < totalPage) {
                   setPageLimit(pageLimit + 1);
@@ -166,7 +164,7 @@ const ShopContainer = () => {
               className="bg-blue-500 text-white px-4 py-2 rounded"
             >
               Next
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
